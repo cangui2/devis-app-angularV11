@@ -1,7 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
+import {saveAs} from 'file-saver';
+
+
 @Component({
   selector: 'app-devis',
   templateUrl: './devis.component.html',
@@ -42,6 +45,7 @@ export class DevisComponent implements OnInit {
 
   productForm: FormGroup;
   // tslint:disable-next-line:variable-name
+  private selectedFile: any;
 
 
   constructor(private fb: FormBuilder) {
@@ -139,6 +143,33 @@ export class DevisComponent implements OnInit {
       });
     }
   }
+  // tslint:disable-next-line:typedef
+  public saveJson(){
+    const blob = new Blob([JSON.stringify(this.productForm.value)], {type : 'application/json'});
+    saveAs(blob, 'test.json');
+  }
+
+  // tslint:disable-next-line:typedef
+  public onFileChanged(event: HTMLInputElement) {
+   console.log(event);
+
+
+
+   const fileReader = new FileReader();
+
+   fileReader.onload = () => {
+
+     const {files} = event;
+     // @ts-ignore
+     console.log(JSON.parse(files));
+
+    };
+   fileReader.onerror = (error) => {
+      console.log(error);
+    };
+
+    }
+
 
 
 }

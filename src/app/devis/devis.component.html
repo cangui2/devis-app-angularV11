@@ -121,6 +121,13 @@
         <div class="col-md-4 text-right">
           <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
         </div>
+        <div class="col-md-4 text-right">
+          <button class="btn btn-success btn-block" (click)="saveJson()">Download json</button>
+        </div>
+        <div class="input-group mb-3">
+          <label class="input-group-text" for="inputGroupFile01">Upload</label>
+          <input #f type="file" class="form-control" id="inputGroupFile01"  (click)="onFileChanged(f)">
+        </div>
       </form>
     </div>
     <!--<input type="text"  />-->

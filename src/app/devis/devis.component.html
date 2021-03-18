@@ -1,0 +1,212 @@
+<p>devis works!</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm">
+      <h1>Devis app</h1>
+      <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+      <div class="accordion accordion-flush" id="accordionFlushExample">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+              Coordonnée Client #1
+            </button>
+          </h2>
+          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <p>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]='val.name'>
+              </p>
+              <p>
+                <label for="name">First Name:</label>
+                <input type="text" id="firstName" name="firstName" formControlName="firstName" class="form-control"
+                       [(ngModel)]='val.firstName'>
+              </p>
+              <p>
+                <label for="name">Adresse:</label>
+                <input type="text" id="adress" name="adress" formControlName="adress" class="form-control"
+                       [(ngModel)]='val.adress'>
+              </p>
+              <p>
+                <label for="name">Adresse 2:</label>
+                <input type="text" id="adress2" name="adress2" formControlName="adress2" class="form-control"
+                       [(ngModel)]='val.adress2'>
+              </p>
+              <p>
+                <label for="name">Code Postal:</label>
+                <input type="text" id="codePostal" name="codePostal" formControlName="codePostal" class="form-control"
+                       [(ngModel)]='val.codePostal'>
+              </p>
+              <p>
+                <label for="name">Ville:</label>
+                <input type="text" id="ville" name="ville" formControlName="ville" class="form-control"
+                       [(ngModel)]='val.ville'>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingTwo">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseTwo">
+              Condition , renseignement paiement etc... #2
+            </button>
+          </h2>
+          <div id="flush-collapseTwo" class="accordion-collapse collapse" aria-labelledby="flush-headingTwo" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <p>
+                <label for="name">Description :</label>
+                <input type="text" id="description" name="description" formControlName="description" class="form-control" [(ngModel)]='val.description'>
+              </p>
+              <p>
+                <label for="name">Condition de paiement:</label>
+                <input type="text" id="condPaiement" name="condPaiement" formControlName="condPaiement" class="form-control" [(ngModel)]='val.condPaiement'>
+              </p>
+              <p>
+                <label for="name">Date:</label>
+                <input type="text" id="dateInter" name="dateInter" formControlName="dateInter" class="form-control" [(ngModel)]='val.dateInter'>
+              </p>
+              <p>
+                <label for="name">Decription Supplementaire:</label>
+                <input type="text" id="descriptSup" name="descriptSup" formControlName="descriptSup" class="form-control" [(ngModel)]='val.descriptSup'>
+              </p>
+              <p>
+                <label for="name">Devis valable jusqu'a :</label>
+                <input type="text" id="dateValide" name="dateValide" formControlName="dateValide" class="form-control" [(ngModel)]='val.dateValide'>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="flush-headingThree">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+              Designation  #3
+            </button>
+          </h2>
+          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+            <div class="accordion-body">
+              <table class="table table-bordered" formArrayName="quantities">
+              <tr>
+                <th >Designation</th>
+                <th >Quantitée</th>
+                <th >Prix</th>
+                <th> <button type="button" (click)="addQuantity()" class="btn btn-outline-primary">Add More</button></th>
+              </tr>
+              <tr *ngFor="let designations of quantities().controls; let i=index" [formGroupName]="i">
+                <td>
+
+                  <div class="input-group">
+                    <textarea class="form-control" aria-label="With textarea" formControlName="designations" class="form-control"></textarea>
+                  </div>
+                </td>
+                <td>
+                  <div class="input-group">
+                  <input type="text" formControlName="qte" class="form-control" >
+                  </div>
+                </td>
+                <td>
+                  <input type="text" formControlName="prixHt" class="form-control">
+                </td>
+
+                <td>
+                  <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+                </td>
+              </tr>
+            </table>
+              </div>
+          </div>
+        </div>
+      </div>
+
+        <button type="submit" class="btn btn-success">Submit</button>
+      </form>
+    </div>
+    <!--<input type="text"  />-->
+    <!--{{val}}-->
+
+
+    <div class="col-sm devis" >
+      <div class="row">
+        <div class="col">
+          En tete  societe
+        </div>
+        <div class="col">
+          <p>{{val.name}}&nbsp;{{val.firstName}}
+            <br>{{val.adress}}
+            <br> {{val.adress2}}
+            <br>{{val.ville}}&nbsp;{{val.codePostal}}
+          </p>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Decription : {{val.description}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Condition de paiment :{{val.condPaiement}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Date de saisie du devis : {{val.dateInter}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          Information complementaite :{{val.descriptSup}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col">
+          <table class="table table-primary">
+            <thead>
+            <tr>
+              <th>Decsription</th>
+              <th>Quantite</th>
+              <th>Prix Ht (€)</th>
+              <th>Total Ht (€)</th>
+            </tr>
+            </thead>
+            <tfoot>
+            <tr>
+              <td colspan="3">SUM</td>
+              <td>118</td>
+            </tr>
+            </tfoot>
+            <tbody>
+            <tr class="table-info" *ngFor="let designations of quantities().controls; let i=index" >
+              <td>
+                {{designations.value.designations}}
+              <td>
+               {{designations.value.qte}}
+              </td>
+              <td>
+                {{designations.value.prixHt}}
+              </td>
+              <td>
+                {{designations.value.prixHt*designations.value.qte}}
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+        </div>
+
+      </div>
+      <div class="row">
+        <div class="col">
+          Date de validité du devis :{{val.dateValide}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-sm">
+          Date de signature
+        </div>
+        <div class="col-sm">
+          Signature
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
-
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
 @Component({
   selector: 'app-devis',
   templateUrl: './devis.component.html',
@@ -26,7 +27,18 @@ export class DevisComponent implements OnInit {
     qte: '',
     prixHt : '',
   };
-
+  societe = {
+    Nom: 'ATELIER JACQUES CANGUILIEME',
+    CorpDetat: ' Décoration ~ Rénovation ~ Tous corps détat',
+    Status: ' SARL au capital de 50 000F',
+    adress : '26,rue des Rigoles',
+    codePostal : '75020 ',
+    ville : 'PARIS',
+    telephone : ' 01 48 23 92 18',
+    siret : '394 064 927 00012' ,
+    ape: ' 452 V',
+    tva : '',
+  };
 
   productForm: FormGroup;
   // tslint:disable-next-line:variable-name
@@ -98,7 +110,6 @@ export class DevisComponent implements OnInit {
 
 
 
-
   // tslint:disable-next-line:typedef
   onSubmit() {
 
@@ -107,9 +118,27 @@ export class DevisComponent implements OnInit {
 
   }
 
+
   ngOnInit(): void {
   }
+  public openPDF(): void {
+    const DATA = document.getElementById('htmlpdf');
 
+    if (DATA) {
+      html2canvas(DATA).then(canvas => {
+
+        const fileWidth = 208;
+        const fileHeight = canvas.height * fileWidth / canvas.width;
+
+        const FILEURI = canvas.toDataURL('image/png');
+        const PDF = new jsPDF('p', 'mm', 'a4');
+        const position = 0;
+        PDF.addImage(FILEURI, 'PNG', 0, position, fileWidth, fileHeight);
+
+        PDF.save('angular-demo.pdf');
+      });
+    }
+  }
 
 
 }

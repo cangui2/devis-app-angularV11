@@ -1,5 +1,8 @@
 .devis{
-
-  border: solid;
+  min-height: 800px;
+  border: solid beige;
 }
 
+.card{
+  top: 10px;
+}

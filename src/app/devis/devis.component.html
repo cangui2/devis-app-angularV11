@@ -118,16 +118,30 @@
       </div>
 
         <button type="submit" class="btn btn-success">Submit</button>
+        <div class="col-md-4 text-right">
+          <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
+        </div>
       </form>
     </div>
     <!--<input type="text"  />-->
     <!--{{val}}-->
 
 
-    <div class="col-sm devis" >
+    <div class="col-sm devis" id="htmlpdf" >
       <div class="row">
         <div class="col-sm">
-         En tete Societe
+          <div class="card">
+            <div class="card-body">
+              <p>{{societe.Nom}}
+                <br>{{societe.CorpDetat}}
+                <br> {{societe.Status}}
+                <br> {{societe.adress}}
+                <br>{{societe.codePostal}}&nbsp;{{societe.ville}}
+                <br> Tel:{{societe.telephone}}
+                <br> Siret :{{societe.siret}}&nbsp;APE:{{societe.ape}}
+              </p>
+            </div>
+          </div>
         </div>
         <div class="col-sm">
 
@@ -153,21 +167,25 @@
           Decription : {{val.description}}
         </div>
       </div>
+        <br>
       <div class="row">
         <div class="col">
           Condition de paiment :{{val.condPaiement}}
         </div>
       </div>
+        <br>
       <div class="row">
         <div class="col">
           Date de saisie du devis : {{val.dateInter}}
         </div>
       </div>
+        <br>
       <div class="row">
         <div class="col">
           Information complementaite :{{val.descriptSup}}
         </div>
       </div>
+        <br>
       <div class="row">
         <div class="col">
           <table class="table table-primary">
@@ -220,4 +238,5 @@
       </div>
     </div>
   </div>
+</div>
 </div>

@@ -196,7 +196,7 @@ export class DevisComponent implements OnInit {
       console.log(sum + 'test');
 
     }
-     return sum.reduce((accumulator, currentValue) => accumulator + currentValue);
+    return sum.reduce((accumulator, currentValue) => accumulator + currentValue);
 
     }
 

@@ -4,6 +4,12 @@
     <div class="col-sm">
       <h1>Devis app</h1>
       <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+        <label >Format à choisir :</label>
+        <select class="form-select" aria-label="Default select example" id="format" name="format" formControlName="format" [(ngModel)]='val.format'>
+          <option selected>Selectionner le format</option>
+          <option value="Devis">Devis</option>
+          <option value="Facture">Facture</option>
+        </select>
       <div class="accordion accordion-flush" id="accordionFlushExample">
         <div class="accordion-item">
           <h2 class="accordion-header" id="flush-headingOne">
@@ -16,6 +22,7 @@
               <p>
                 <label for="name">Name:</label>
                 <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]='val.name'>
+
               </p>
               <p>
                 <label for="name">First Name:</label>
@@ -76,47 +83,98 @@
             </div>
           </div>
         </div>
-        <div class="accordion-item">
-          <h2 class="accordion-header" id="flush-headingThree">
-            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
-              Designation  #3
-            </button>
-          </h2>
-          <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
-            <div class="accordion-body">
-              <table class="table table-bordered" formArrayName="quantities">
-              <tr>
-                <th >Designation</th>
-                <th >Quantitée</th>
-                <th >Prix</th>
-                <th> <button type="button" (click)="addQuantity()" class="btn btn-outline-primary">Add More</button></th>
-              </tr>
-              <tr *ngFor="let designations of quantities().controls; let i=index" [formGroupName]="i" >
-                <td>
-
-                  <div class="input-group">
-                    <textarea class="form-control" aria-label="With textarea" formControlName="designations" class="form-control"></textarea>
-                  </div>
-                </td>
-                <td>
-                  <div class="input-group">
-                  <input type="text" formControlName="qte" class="form-control">
-                  </div>
-                </td>
-
-                <td>
-                  <input type="text" formControlName="prixHt" class="form-control">
-                </td>
-
-                <td>
-                  <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
-                </td>
-              </tr>
-            </table>
-              </div>
-          </div>
-        </div>
       </div>
+        <div *ngIf="dateIsOk ; then thenBlock else elseBlock" ></div>
+        <ng-template #thenBlock>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree5">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree5" aria-expanded="false" aria-controls="flush-collapseThree">
+                Designation  #5
+              </button>
+            </h2>
+            <div id="flush-collapseThree5" class="accordion-collapse collapse" aria-labelledby="flush-headingThree5" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <table class="table table-bordered" formArrayName="quantities">
+                  <tr>
+                    <th >Designation</th>
+                    <th >Quantitée</th>
+                    <th >Prix</th>
+                    <th> <button type="button" (click)="addQuantity();" class="btn btn-outline-primary">Add More</button></th>
+                  </tr>
+                  <tr *ngFor="let designations of val.quantities ; let i=index " >
+
+                    <td>
+
+                      <div class="input-group">
+                        <textarea class="form-control" aria-label="With textarea" formControlName="designations" class="form-control" >{{designations.designations}}</textarea>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="input-group">
+                        <input type="text" formControlName="qte" class="form-control" value="{{designations.qte}}">
+                      </div>
+                    </td>
+
+                    <td>
+                      <input type="text" formControlName="prixHt" class="form-control" value="{{designations.prixHt}}" >
+                    </td>
+
+                    <td>
+                      <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+
+        </ng-template>
+
+        <ng-template #elseBlock>
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="flush-headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseThree" aria-expanded="false" aria-controls="flush-collapseThree">
+                Designation  #4
+              </button>
+            </h2>
+            <div id="flush-collapseThree" class="accordion-collapse collapse" aria-labelledby="flush-headingThree" data-bs-parent="#accordionFlushExample">
+              <div class="accordion-body">
+                <table class="table table-bordered" formArrayName="quantities">
+                  <tr>
+                    <th >Designation</th>
+                    <th >Quantitée</th>
+                    <th >Prix</th>
+                    <th> <button type="button" (click)="addQuantity()" class="btn btn-outline-primary">Add More</button></th>
+                  </tr>
+                  <tr *ngFor="let designations of quantities().controls; let i=index " [formGroupName]="i" >
+                    <td>
+
+                      <div class="input-group">
+                        <textarea class="form-control" aria-label="With textarea" formControlName="designations" class="form-control"></textarea>
+                      </div>
+                    </td>
+                    <td>
+                      <div class="input-group">
+                        <input type="text" formControlName="qte" class="form-control"[(ngModel)]='val.quantities[i].qte'>
+                      </div>
+                    </td>
+
+                    <td>
+                      <input type="text" formControlName="prixHt" class="form-control"[(ngModel)]='val.quantities[i].prixHt' >
+                    </td>
+
+                    <td>
+                      <button (click)="removeQuantity(i)" class="btn btn-danger">Remove</button>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+
+        </ng-template>
+
 
         <button type="submit" class="btn btn-success">Submit</button>
         <div class="col-md-4 text-right">
@@ -125,9 +183,13 @@
         <div class="col-md-4 text-right">
           <button class="btn btn-success btn-block" (click)="saveJson()">Download json</button>
         </div>
-        <div class="input-group mb-3">
-          <label class="input-group-text" for="inputGroupFile01">Upload</label>
-          <input  type="file" class="form-control" id="inputGroupFile01"  (change) ="readFile($event)">
+<!--        <div class="input-group mb-3">-->
+<!--          <label class="input-group-text" for="inputGroupFile01">Upload</label>-->
+<!--          <input  type="file" class="form-control" id="inputGroupFile01"  (change) ="readFile($event)">-->
+<!--        </div>-->
+        <div class="upload-btn-wrapper">
+          <button class="btn2 ">Upload a file</button>
+          <input type="file" name="myfile" (change) ="readFile($event)"/>
         </div>
       </form>
     </div>
@@ -138,6 +200,7 @@
     <div class="col-sm devis" id="htmlpdf" >
       <div class="row">
         <div class="col-sm">
+          <h1>{{val.format}}</h1>
           <div class="card">
             <div class="card-body">
               <p>{{societe.Nom}}
@@ -212,19 +275,38 @@
             </tr>
             </tfoot>
             <tbody>
-            <tr class="table-info" *ngFor="let designations of quantities().controls; let i=index" >
-              <td>
-                {{designations.value.designations}}
-              <td>
-               {{designations.value.qte}}
-              </td>
-              <td>
-                {{designations.value.prixHt}}
-              </td>
-              <td>
-                {{designations.value.prixHt*designations.value.qte}}
-              </td>
-            </tr>
+            <div *ngIf="dateIsOk; then thenBlock1 else elseBlock1"></div>
+            <ng-template #thenBlock1>
+              <tr class="table-info" *ngFor="let designations of productForm.value; let i=index" >
+                <td>
+                  {{designations.quantities.designations}}
+                <td>
+                  {{designations.qte}}
+                </td>
+                <td>
+                  {{designations.prixHt}}
+                </td>
+                <!--              <td>-->
+                <!--                {{designations.prixHt*designations.qte}}-->
+                <!--              </td>-->
+              </tr>
+            </ng-template>
+            <ng-template #elseBlock1>
+              <tr class="table-info" *ngFor="let designations of val.quantities; let i=index" >
+                <td>
+                  {{designations.designations}}
+                <td>
+                  {{designations.qte}}
+                </td>
+                <td>
+                  {{designations.prixHt}}
+                </td>
+                <!--              <td>-->
+                <!--                {{designations.prixHt*designations.qte}}-->
+                <!--              </td>-->
+              </tr>
+            </ng-template>
+
             </tbody>
           </table>
 

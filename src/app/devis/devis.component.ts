@@ -3,10 +3,6 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {saveAs} from 'file-saver';
-import {ajaxGetJSON} from 'rxjs/internal-compatibility';
-import {any} from 'codelyzer/util/function';
-
-
 
 
 
@@ -35,15 +31,15 @@ export class DevisComponent implements OnInit {
       dateInter : '',
       descriptSup : '',
       dateValide : '',
+      format : '' ,
 
       quantities: this.fb.array([]) ,
 
     });
 
   }
-
-  name = '';
-  firstName = '' ;
+  test: { designation: string; qte: string; prixHt: string; }[] | undefined ;
+  dateIsOk = false;
   val = {
     name: '',
     firstName: '',
@@ -59,6 +55,16 @@ export class DevisComponent implements OnInit {
     designations: '',
     qte: '',
     prixHt : '',
+    format : '',
+    quantities : [{
+
+      designations: '',
+
+      qte: '',
+
+      prixHt : '',
+
+    }]
   };
   societe = {
     Nom: 'ATELIER JACQUES CANGUILIEME',
@@ -101,8 +107,6 @@ export class DevisComponent implements OnInit {
 
   }
 
-
-
   // tslint:disable-next-line:typedef
   addQuantity() {
 
@@ -110,17 +114,12 @@ export class DevisComponent implements OnInit {
 
   }
 
-
-
   // tslint:disable-next-line:typedef
   removeQuantity(i: number) {
 
     this.quantities().removeAt(i);
 
   }
-
-
-
 
   // tslint:disable-next-line:typedef
   onSubmit() {
@@ -173,6 +172,9 @@ export class DevisComponent implements OnInit {
     fileReader.onload = () => {
       if (typeof fileReader.result === 'string') {
         this.val = JSON.parse(fileReader.result);
+        this.dateIsOk = true;
+        this.extratArray();
+        console.log(this.val.quantities );
         console.log(JSON.parse(fileReader.result));
       }
     };
@@ -199,7 +201,31 @@ export class DevisComponent implements OnInit {
     return sum.reduce((accumulator, currentValue) => accumulator + currentValue);
 
     }
+  // tslint:disable-next-line:typedef
+  extratArray(){
+      const test1 = [];
+    // tslint:disable-next-line:prefer-for-of
+      for ( let i = 0 ; i < this.val.quantities.length ; i++){
+      // tslint:disable-next-line:no-unused-expression
+      // test.push(this.val.quantities[i].designations);
+      // test.push(this.val.quantities[i].qte);
+      // test.push(this.val.quantities[i].prixHt);
+      const qte = this.val.quantities[i].qte;
+      const prixHt = this.val.quantities[i].prixHt;
 
+
+      test1.push
+        (
+          {designation: this.val.quantities[i].designations, qte: this.val.quantities[i].qte, prixHt: this.val.quantities[i].prixHt },
+
+        );
+      // @ts-ignore
+      this.test = test1;
+      console.log(this.test + 'ici et la ');
+
+   }
+
+  }
 
 
 

@@ -126,7 +126,7 @@
         </div>
         <div class="input-group mb-3">
           <label class="input-group-text" for="inputGroupFile01">Upload</label>
-          <input #f type="file" class="form-control" id="inputGroupFile01"  (click)="onFileChanged(f)">
+          <input  type="file" class="form-control" id="inputGroupFile01"  (change) ="readFile($event)">
         </div>
       </form>
     </div>

@@ -3,6 +3,10 @@ import {FormArray, FormBuilder, FormGroup} from '@angular/forms';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {saveAs} from 'file-saver';
+import {ajaxGetJSON} from 'rxjs/internal-compatibility';
+
+
+
 
 
 @Component({
@@ -11,6 +15,31 @@ import {saveAs} from 'file-saver';
   styleUrls: ['./devis.component.css']
 })
 export class DevisComponent implements OnInit {
+
+
+  constructor(private fb: FormBuilder) {
+
+
+
+    this.productForm = this.fb.group({
+
+      name: '',
+      firstName: '',
+      adress: '',
+      adress2 : '',
+      codePostal : '',
+      ville : '',
+      description : '',
+      condPaiement : '' ,
+      dateInter : '',
+      descriptSup : '',
+      dateValide : '',
+
+      quantities: this.fb.array([]) ,
+
+    });
+
+  }
 
   name = '';
   firstName = '' ;
@@ -47,30 +76,6 @@ export class DevisComponent implements OnInit {
   // tslint:disable-next-line:variable-name
   private selectedFile: any;
 
-
-  constructor(private fb: FormBuilder) {
-
-
-
-    this.productForm = this.fb.group({
-
-      name: '',
-      firstName: '',
-      adress: '',
-      adress2 : '',
-      codePostal : '',
-      ville : '',
-      description : '',
-      condPaiement : '' ,
-      dateInter : '',
-      descriptSup : '',
-      dateValide : '',
-
-      quantities: this.fb.array([]) ,
-
-    });
-
-  }
   quantities(): FormArray {
 
     return this.productForm.get('quantities') as FormArray;
@@ -148,28 +153,30 @@ export class DevisComponent implements OnInit {
     const blob = new Blob([JSON.stringify(this.productForm.value)], {type : 'application/json'});
     saveAs(blob, 'test.json');
   }
+  // tslint:disable-next-line:typedef
+   onFileChanged(event: Event) {
+   // @ts-ignore
+    console.log(event.target.files[0]);
+    // @ts-ignore
+    this.readFile(event.target.files[0]);
+   }
 
   // tslint:disable-next-line:typedef
-  public onFileChanged(event: HTMLInputElement) {
-   console.log(event);
-
-
-
-   const fileReader = new FileReader();
-
-   fileReader.onload = () => {
-
-     const {files} = event;
-     // @ts-ignore
-     console.log(JSON.parse(files));
-
+  readFile(event: Event) {
+    // @ts-ignore
+    this.selectedFile = event.target.files[0];
+    const fileReader = new FileReader();
+    fileReader.readAsText(this.selectedFile, 'UTF-8');
+    fileReader.onload = () => {
+      if (typeof fileReader.result === 'string') {
+        this.val = JSON.parse(fileReader.result);
+        console.log(JSON.parse(fileReader.result));
+      }
     };
-   fileReader.onerror = (error) => {
+    fileReader.onerror = (error) => {
       console.log(error);
     };
-
-    }
-
+  }
 
 
 }

@@ -4,6 +4,7 @@ import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import {saveAs} from 'file-saver';
 import {ajaxGetJSON} from 'rxjs/internal-compatibility';
+import {any} from 'codelyzer/util/function';
 
 
 
@@ -75,6 +76,8 @@ export class DevisComponent implements OnInit {
   productForm: FormGroup;
   // tslint:disable-next-line:variable-name
   private selectedFile: any;
+
+  sumToTal = '';
 
   quantities(): FormArray {
 
@@ -177,6 +180,27 @@ export class DevisComponent implements OnInit {
       console.log(error);
     };
   }
+  // tslint:disable-next-line:typedef
+  total(){
+
+    // const data = this.productForm.value;
+    let sum: any[];
+    sum = [];
+    console.log(this.productForm.value.quantities);
+
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0 ; i < this.productForm.value.quantities.length; i++) {
+     // sum.push( this.productForm.value.quantities.qte) ;
+      sum.push(this.productForm.value.quantities[i].qte * this.productForm.value.quantities[i].prixHt);
+      console.log(this.productForm.value.quantities[i].qte * this.productForm.value.quantities[i].prixHt);
+      console.log(sum + 'test');
+
+    }
+     return sum.reduce((accumulator, currentValue) => accumulator + currentValue);
+
+    }
+
+
 
 
 }

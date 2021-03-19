@@ -91,7 +91,7 @@
                 <th >Prix</th>
                 <th> <button type="button" (click)="addQuantity()" class="btn btn-outline-primary">Add More</button></th>
               </tr>
-              <tr *ngFor="let designations of quantities().controls; let i=index" [formGroupName]="i">
+              <tr *ngFor="let designations of quantities().controls; let i=index" [formGroupName]="i" >
                 <td>
 
                   <div class="input-group">
@@ -100,9 +100,10 @@
                 </td>
                 <td>
                   <div class="input-group">
-                  <input type="text" formControlName="qte" class="form-control" >
+                  <input type="text" formControlName="qte" class="form-control">
                   </div>
                 </td>
+
                 <td>
                   <input type="text" formControlName="prixHt" class="form-control">
                 </td>
@@ -206,8 +207,8 @@
             </thead>
             <tfoot>
             <tr>
-              <td colspan="3">SUM</td>
-              <td>118</td>
+              <td colspan="3" >SUM</td>
+              <td>{{total()}}</td>
             </tr>
             </tfoot>
             <tbody>

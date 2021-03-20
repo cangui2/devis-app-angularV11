@@ -171,7 +171,10 @@ export class DevisComponent implements OnInit {
     fileReader.readAsText(this.selectedFile, 'UTF-8');
     fileReader.onload = () => {
       if (typeof fileReader.result === 'string') {
-        this.val = JSON.parse(fileReader.result);
+
+        // @ts-ignore
+        this.productForm.setValue( JSON.parse(fileReader.result));
+        console.log(this.productForm.value + 'reader');
         this.dateIsOk = true;
         this.extratArray();
         console.log(this.val.quantities );

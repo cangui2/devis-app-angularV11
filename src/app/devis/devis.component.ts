@@ -97,6 +97,7 @@ export class DevisComponent implements OnInit {
 
     return this.fb.group({
 
+
       designations: '',
 
       qte: '',
@@ -110,12 +111,18 @@ export class DevisComponent implements OnInit {
   // tslint:disable-next-line:typedef
   addQuantity() {
 
-    this.quantities().push(this.newQuantity());
+     this.quantities().push(this.newQuantity());
 
   }
-
   // tslint:disable-next-line:typedef
-  removeQuantity(i: number) {
+  addQuantityAuto(){
+    // tslint:disable-next-line:prefer-for-of
+    for (let i = 0; i < this.productForm.value.quantities.length; i++) {
+      this.quantities().push(this.newQuantity());
+    }
+  }
+    // tslint:disable-next-line:typedef
+    removeQuantity(i: number) {
 
     this.quantities().removeAt(i);
 
@@ -169,22 +176,34 @@ export class DevisComponent implements OnInit {
     this.selectedFile = event.target.files[0];
     const fileReader = new FileReader();
     fileReader.readAsText(this.selectedFile, 'UTF-8');
-    fileReader.onload = () => {
-      if (typeof fileReader.result === 'string') {
 
-        // @ts-ignore
-        this.productForm.setValue( JSON.parse(fileReader.result));
-        console.log(this.productForm.value + 'reader');
-        this.dateIsOk = true;
-        this.extratArray();
-        console.log(this.val.quantities );
-        console.log(JSON.parse(fileReader.result));
+    fileReader.onload = () => {
+      const p = JSON.parse(fileReader.result as string);
+      console.log(p.quantities.length);
+      // tslint:disable-next-line:prefer-for-of
+      for (let i = 0; i < p.quantities.length; i++) {
+        this.addQuantity();
       }
+      this.productForm.setValue( JSON.parse(fileReader.result as string));
+      console.log(this.productForm.value + 'reader');
+      console.log(JSON.parse(fileReader.result as string));
+
+      this.dateIsOk = true;
+
     };
     fileReader.onerror = (error) => {
       console.log(error);
     };
+    // @ts-ignore
+
+    // tslint:disable-next-line:prefer-for-of
+    // this.addQuantity();
+
   }
+  // tslint:disable-next-line:typedef
+
+
+
   // tslint:disable-next-line:typedef
   total(){
 
@@ -205,30 +224,30 @@ export class DevisComponent implements OnInit {
 
     }
   // tslint:disable-next-line:typedef
-  extratArray(){
-      const test1 = [];
-    // tslint:disable-next-line:prefer-for-of
-      for ( let i = 0 ; i < this.val.quantities.length ; i++){
-      // tslint:disable-next-line:no-unused-expression
-      // test.push(this.val.quantities[i].designations);
-      // test.push(this.val.quantities[i].qte);
-      // test.push(this.val.quantities[i].prixHt);
-      const qte = this.val.quantities[i].qte;
-      const prixHt = this.val.quantities[i].prixHt;
-
-
-      test1.push
-        (
-          {designation: this.val.quantities[i].designations, qte: this.val.quantities[i].qte, prixHt: this.val.quantities[i].prixHt },
-
-        );
-      // @ts-ignore
-      this.test = test1;
-      console.log(this.test + 'ici et la ');
-
-   }
-
-  }
+  // extratArray(){
+  //     const test1 = [];
+  //   // tslint:disable-next-line:prefer-for-of
+  //     for ( let i = 0 ; i < this.val.quantities.length ; i++){
+  //     // tslint:disable-next-line:no-unused-expression
+  //     // test.push(this.val.quantities[i].designations);
+  //     // test.push(this.val.quantities[i].qte);
+  //     // test.push(this.val.quantities[i].prixHt);
+  //     const qte = this.val.quantities[i].qte;
+  //     const prixHt = this.val.quantities[i].prixHt;
+  //
+  //
+  //     test1.push
+  //       (
+  //         {designation: this.val.quantities[i].designations, qte: this.val.quantities[i].qte, prixHt: this.val.quantities[i].prixHt },
+  //
+  //       );
+  //     // @ts-ignore
+  //     this.test = test1;
+  //     console.log(this.test + 'ici et la ');
+  //
+  //  }
+  //
+  // }
 
 
 

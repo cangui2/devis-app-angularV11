@@ -89,9 +89,10 @@
                 <th >Designation</th>
                 <th >Quantitée</th>
                 <th >Prix</th>
+
                 <th> <button type="button" (click)="addQuantity()" class="btn btn-outline-primary">Add More</button></th>
               </tr>
-              <tr *ngFor="let designations of quantities().controls; let i=index" [formGroupName]="i" >
+              <tr *ngFor="let designations of quantities().controls; let i=index" [formGroupName]="i">
                 <td>
 
                   <div class="input-group">
@@ -100,7 +101,7 @@
                 </td>
                 <td>
                   <div class="input-group">
-                  <input type="text" formControlName="qte" class="form-control">
+                  <input type="text" id="qte" formControlName="qte" name="qte" class="form-control">
                   </div>
                 </td>
 
@@ -117,7 +118,6 @@
           </div>
         </div>
       </div>
-
         <button type="submit" class="btn btn-success">Submit</button>
         <div class="col-md-4 text-right">
           <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
@@ -129,8 +129,11 @@
           <button class="btn2 ">Upload a file</button>
           <input type="file" name="myfile" (change) ="readFile($event)"/>
         </div>
+
       </form>
+
     </div>
+
     <!--<input type="text"  />-->
     <!--{{val}}-->
 
@@ -172,7 +175,7 @@
       </div>
       <div class="row">
         <div class="col">
-          Decription : {{productForm.value.description}}
+          Decription : {{val.description}}
         </div>
       </div>
         <br>
@@ -212,19 +215,38 @@
             </tr>
             </tfoot>
             <tbody>
-            <tr class="table-info" *ngFor="let designations of quantities().controls; let i=index" >
-              <td>
-                {{designations.value.designations}}
-              <td>
-               {{designations.value.qte}}
-              </td>
-              <td>
-                {{designations.value.prixHt}}
-              </td>
-              <td>
-                {{designations.value.prixHt*designations.value.qte}}
-              </td>
-            </tr>
+            <div *ngIf="dateIsOk; then thenBlock else elseBlock"></div>
+            <ng-template #thenBlock>
+              <tr class="table-info" *ngFor="let designations of quantities().controls; let i=index" >
+                <td>
+                  {{designations.value.designations}}
+                <td>
+                  {{designations.value.qte}}
+                </td>
+                <td>
+                  {{designations.value.prixHt}}
+                </td>
+                <td>
+                  {{designations.value.prixHt*designations.value.qte}}
+                </td>
+              </tr>
+            </ng-template>
+            <ng-template #elseBlock>
+              <tr class="table-info" *ngFor="let designations of quantities().controls; let i=index" >
+                <td>
+                  {{designations.value.designations}}
+                <td>
+                  {{designations.value.qte}}
+                </td>
+                <td>
+                  {{designations.value.prixHt}}
+                </td>
+                <td>
+                  {{designations.value.prixHt*designations.value.qte}}
+                </td>
+              </tr>
+            </ng-template>
+
             </tbody>
           </table>
 

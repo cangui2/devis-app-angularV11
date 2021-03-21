@@ -165,35 +165,35 @@
         <div class="col">
           <div class="card">
             <div class="card-body">
-              <p>{{val.name}}&nbsp;{{val.firstName}}
-                <br>{{val.adress}}
-                <br> {{val.adress2}}
-                <br>{{val.codePostal}}&nbsp;{{val.ville}}
+              <p>{{productForm.value.name}}&nbsp;{{productForm.value.firstName}}
+                <br>{{productForm.value.adress}}
+                <br> {{productForm.value.adress2}}
+                <br>{{productForm.value.codePostal}}&nbsp;{{productForm.value.ville}}
               </p>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col">
-          Decription : {{val.description}}
+          Decription : {{productForm.value.description}}
         </div>
       </div>
         <br>
       <div class="row">
         <div class="col">
-          Condition de paiment :{{val.condPaiement}}
+          Condition de paiment :{{productForm.value.condPaiement}}
         </div>
       </div>
         <br>
       <div class="row">
         <div class="col">
-          Date de saisie du devis : {{val.dateInter}}
+          Date de saisie du devis : {{productForm.value.dateInter}}
         </div>
       </div>
         <br>
       <div class="row">
         <div class="col">
-          Information complementaite :{{val.descriptSup}}
+          Information complementaite :{{productForm.value.descriptSup}}
         </div>
       </div>
         <br>
@@ -254,8 +254,11 @@
 
       </div>
       <div class="row">
-        <div class="col">
-          Date de validité du devis :{{val.dateValide}}
+        <div class="col-sm">
+          Date de validité du devis :
+        </div>
+        <div class="col-sm">
+          {{productForm.value.dateValide}}
         </div>
       </div>
       <div class="row">

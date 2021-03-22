@@ -1,6 +1,7 @@
 {
   "name": "devis-app-angular",
   "version": "0.0.0",
+  "description": "app Devis!",
   "main": "app.js",
   "scripts": {
     "ng": "ng",
@@ -8,7 +9,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "setup": "electron-packager . — platform=win32 --overwrite"
   },
   "private": true,
   "dependencies": {
@@ -38,6 +40,7 @@
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
     "electron": "^12.0.1",
+    "electron-installer-windows": "^3.0.0",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.1.0",
@@ -48,6 +51,8 @@
     "protractor": "~7.0.0",
     "ts-node": "~8.3.0",
     "tslint": "~6.1.0",
-    "typescript": "~4.1.5"
+    "typescript": "~4.1.5",
+    "electron-packager": "*",
+    "electron-prebuilt": "*"
   }
 }

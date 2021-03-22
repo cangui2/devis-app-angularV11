@@ -20,32 +20,32 @@
             <div class="accordion-body">
               <p>
                 <label for="name">Nom:</label>
-                <input type="text" id="name" name="name" formControlName="name" class="form-control" [(ngModel)]='val.name'>
+                <input type="text" id="name" name="name" formControlName="name" class="form-control" >
               </p>
               <p>
                 <label for="name">Prenom:</label>
                 <input type="text" id="firstName" name="firstName" formControlName="firstName" class="form-control"
-                       [(ngModel)]='val.firstName'>
+                       >
               </p>
               <p>
                 <label for="name">Adresse:</label>
                 <input type="text" id="adress" name="adress" formControlName="adress" class="form-control"
-                       [(ngModel)]='val.adress'>
+                       >
               </p>
               <p>
                 <label for="name">Adresse 2:</label>
                 <input type="text" id="adress2" name="adress2" formControlName="adress2" class="form-control"
-                       [(ngModel)]='val.adress2'>
+                       >
               </p>
               <p>
                 <label for="name">Code Postal:</label>
                 <input type="text" id="codePostal" name="codePostal" formControlName="codePostal" class="form-control"
-                       [(ngModel)]='val.codePostal'>
+                      >
               </p>
               <p>
                 <label for="name">Ville:</label>
                 <input type="text" id="ville" name="ville" formControlName="ville" class="form-control"
-                       [(ngModel)]='val.ville'>
+                      >
               </p>
             </div>
           </div>
@@ -60,23 +60,23 @@
             <div class="accordion-body">
               <p>
                 <label for="name">Description :</label>
-                <input type="text" id="description" name="description" formControlName="description" class="form-control" [(ngModel)]='val.description'>
+                <input type="text" id="description" name="description" formControlName="description" class="form-control" >
               </p>
               <p>
                 <label for="name">Condition de paiement:</label>
-                <input type="text" id="condPaiement" name="condPaiement" formControlName="condPaiement" class="form-control" [(ngModel)]='val.condPaiement'>
+                <input type="text" id="condPaiement" name="condPaiement" formControlName="condPaiement" class="form-control" >
               </p>
               <p>
                 <label for="name">Date:</label>
-                <input type="text" id="dateInter" name="dateInter" formControlName="dateInter" class="form-control" [(ngModel)]='val.dateInter'>
+                <input type="text" id="dateInter" name="dateInter" formControlName="dateInter" class="form-control" >
               </p>
               <p>
                 <label for="name">Decription Supplementaire:</label>
-                <input type="text" id="descriptSup" name="descriptSup" formControlName="descriptSup" class="form-control" [(ngModel)]='val.descriptSup'>
+                <input type="text" id="descriptSup" name="descriptSup" formControlName="descriptSup" class="form-control" >
               </p>
               <p>
                 <label for="name">Devis valable jusqu'a :</label>
-                <input type="text" id="dateValide" name="dateValide" formControlName="dateValide" class="form-control" [(ngModel)]='val.dateValide'>
+                <input type="text" id="dateValide" name="dateValide" formControlName="dateValide" class="form-control" >
               </p>
             </div>
           </div>
@@ -126,16 +126,16 @@
         <div class="container">
           <div class="row">
             <div class="col-sm">
-              <button type="submit" class="btn btn-success">Submit</button>
+              <button type="submit" class="btn2">Submit</button>
             </div>
             <div class="col-sm">
               <div class="col-md-4 text-right">
-                <button class="btn btn-success btn-block" (click)="openPDF()">Download PDF</button>
+                <button class="btn2" (click)="openPDF()">Download PDF</button>
               </div>
             </div>
             <div class="col-sm">
               <div class="col-md-4 text-right">
-                <button class="btn btn-success btn-block" (click)="saveJson()">Download json</button>
+                <button class="btn2" (click)="saveJson()">Download json</button>
               </div>
             </div>
             <div class="col-sm">

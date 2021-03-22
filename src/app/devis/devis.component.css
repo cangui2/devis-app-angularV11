@@ -1,6 +1,5 @@
 .devis{
   min-height: 900px;
-  border: solid beige;
 }
 
 .card{
@@ -56,5 +55,9 @@
   background: linear-gradient(#99BCFF, #33D6EE);
   -pie-background: linear-gradient(#99BCFF, #33D6EE);
   behavior: url(/pie/PIE.htc);
+}
+
+.input-descript{
+  margin-top: 20px;
 }
 

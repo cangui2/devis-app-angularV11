@@ -30,3 +30,26 @@
   opacity: 0;
 }
 
+.body-left{
+  margin-left: 10px;
+  margin-right: 10px;
+  border: 1px solid #696;
+  padding: 60px 0;
+  text-align: center; width: 200px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  -webkit-box-shadow: #666 0px 2px 3px;
+  -moz-box-shadow: #666 0px 2px 3px;
+  box-shadow: #666 0px 2px 3px;
+  background: #99BCFF;
+  background: -webkit-gradient(linear, 0 0, 0 bottom, from(#99BCFF), to(#33D6EE));
+  background: -webkit-linear-gradient(#99BCFF, #33D6EE);
+  background: -moz-linear-gradient(#99BCFF, #33D6EE);
+  background: -ms-linear-gradient(#99BCFF, #33D6EE);
+  background: -o-linear-gradient(#99BCFF, #33D6EE);
+  background: linear-gradient(#99BCFF, #33D6EE);
+  -pie-background: linear-gradient(#99BCFF, #33D6EE);
+  behavior: url(/pie/PIE.htc);
+}
+

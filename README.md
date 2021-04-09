@@ -3,7 +3,8 @@
   <img alt="Version" src="https://img.shields.io/badge/version-1-blue.svg?cacheSeconds=2592000" />
 </p>
 
-> Application de génération, de sauvegarde d'un devis, facture ou relance.
+> Application de génération, de sauvegarde d'un devis, facture ou relance.Un système de sauvegarde par fichier json, un générateur PDF .
+Deployable en version web ou en application Desktop.
 
 ## Install
 
